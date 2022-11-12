@@ -72,23 +72,23 @@ async function getMintedNfts(aptosClient, collectionTokenDataHandle, cmResourceA
             name: event["data"]["id"]["name"],
             imageUri: null
         }
-        // try {
-        //     const jsonUrl = (await aptosClient.getTableItem(collectionTokenDataHandle, {
-        //         "key_type": "0x3::token::TokenDataId",
-        //         "value_type": "0x3::token::TokenData",
-        //         "key": {
-        //             "creator": cmResourceAccount,
-        //             "collection": collectionName,
-        //             "name": mintedNft.name
-        //         }
-        //     })).uri
-        //     console.log("11111" + jsonUrl);
-        //     const response = await (await fetch(jsonUrl)).json()
-        //     mintedNft.imageUri = response['image']
-        //     console.log("22222" + mintedNft.imageUri);
-        // } catch (err) {
-        //     console.error(err);
-        // }
+         try {
+             const jsonUrl = (await aptosClient.getTableItem(collectionTokenDataHandle, {
+                 "key_type": "0x3::token::TokenDataId",
+                 "value_type": "0x3::token::TokenData",
+                 "key": {
+                   "creator": cmResourceAccount,
+                     "collection": collectionName,
+                     "name": mintedNft.name
+                 }
+             })).uri
+             console.log("11111" + jsonUrl);
+             const response = await (await fetch(jsonUrl)).json()
+             mintedNft.imageUri = response['image']
+             console.log("22222" + mintedNft.imageUri);
+         } catch (err) {
+             console.error(err);
+         }
         mintedNfts.push(mintedNft)
     }
 
